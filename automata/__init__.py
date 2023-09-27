@@ -14,4 +14,5 @@ def create_app(config_name='development'):
 def register_modules(app):
     from automata.games import games_bp
 
-    app.register_blueprint(games_bp)
+    app.register_blueprint(games_bp, url_prefix='/games')
+
