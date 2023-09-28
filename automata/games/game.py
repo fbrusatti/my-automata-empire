@@ -36,7 +36,8 @@ class Game(object):
 mockdb = {
     1: Game(**{'name': 'First game', 'level': 'Low'}),
     2: Game(**{'name': 'Second game', 'level': 'High'}),
-    3: Game(**{'name': 'Third game', 'level': 'Medium'})
+    3: Game(**{'name': 'Third game', 'level': 'Medium'}),
+    5: Game(**{'name': 'Third game', 'level': 'Medium'})
 }
 
 
