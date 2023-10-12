@@ -9,4 +9,3 @@ api = Api(games_bp)
 from automata.games import routes
 from automata.games import game
 
-

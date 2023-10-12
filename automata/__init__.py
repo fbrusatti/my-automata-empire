@@ -2,6 +2,10 @@ from flask import Flask
 from config import config
 from flask_cors import CORS
 
+from flask_sqlalchemy import SQLAlchemy
+
+db = SQLAlchemy(session_options={"expire_on_commit": False})
+
 
 def create_app(config_name='development'):
     app = Flask(__name__)
@@ -11,6 +15,7 @@ def create_app(config_name='development'):
     config[config_name].init_app(app)
 
     register_modules(app)
+    db.init_app(app)
 
     return app
 

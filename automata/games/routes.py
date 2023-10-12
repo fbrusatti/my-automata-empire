@@ -1,14 +1,15 @@
 from flask import jsonify, request
 from automata.games import api
 from automata.games.game import Game, GameSchema
-
+from automata import db
 from flask_restful import Resource
 
 
 class GameResource(Resource):
     def get(self, game_id):
         game_schema = GameSchema()
-        game = Game.find(game_id)
+
+        game = Game.query.filter_by(id=game_id).first()
 
         return jsonify(game_schema.dump(game))
 
@@ -24,7 +25,9 @@ class GameResource(Resource):
         # Validate with schema
         game = Game(**game_schema.load(game_data))
 
-        Game.append(game)
+        # Game.append(game)
+        db.session.add(game)
+        db.session.commit()
 
         return jsonify({'success': 'true'})
 

@@ -1,25 +1,19 @@
 from marshmallow import Schema, fields
+from automata import db
+import json
 
+class Game(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, nullable=False)
+    level = db.Column(db.Integer)
+    board = db.Column(db.Text)
 
-class Game(object):
     def __init__(self, name, level='Low'):
         self.name = name
         self.level = level
-        self.board = [
-            [[''], [''], [''], ['']],
-            [[''], [''], [''], ['']]
-        ]
-
-    def getAll():
-        return mockdb
-
-    def find(id):
-        return mockdb[id]
-
-    def append(game):
-        mockdb[id] = game
-
-        return True
+        self.board = json.dumps(
+            "[ [[''], [''], [''], ['']], [[''], [''], [''], ['']]]"
+        )
 
     def __repr__(self):
         return self.name
@@ -33,16 +27,9 @@ class Game(object):
         }
 
 
-mockdb = {
-    1: Game(**{'name': 'First game', 'level': 'Low'}),
-    2: Game(**{'name': 'Second game', 'level': 'High'}),
-    3: Game(**{'name': 'Third game', 'level': 'Medium'}),
-    5: Game(**{'name': 'Third game', 'level': 'Medium'})
-}
-
-
 class GameSchema(Schema):
     # _id = fields.Str()
     name = fields.Str()
     level = fields.Str()
     board = fields.List(fields.List(fields.List(fields.List(fields.Str()))))
+
